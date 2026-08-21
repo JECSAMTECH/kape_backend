@@ -30,21 +30,21 @@ public class Contacto {
     @JoinColumn(name = "Usuario_id_usuario", referencedColumnName = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "Usuario_cliente_id_cliente")
-    private Long usuarioClienteIdCliente;
+    @Column(name = "Usuario_rol_id_rol")
+    private Long usuarioRolIdRol;
 
     public Contacto() {
     }
 
     public Contacto(String nombre, String correo, String telefono, String asunto,
-                    String mensaje, Usuario usuario, Long usuarioClienteIdCliente) {
+                    String mensaje, Usuario usuario, Long usuarioRolIdRol) {
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;
         this.asunto = asunto;
         this.mensaje = mensaje;
         this.usuario = usuario;
-        this.usuarioClienteIdCliente = usuarioClienteIdCliente;
+        this.usuarioRolIdRol = usuarioRolIdRol;
     }
 
     // Getters & Setters
@@ -105,11 +105,11 @@ public class Contacto {
         this.usuario = usuario;
     }
 
-    public Long getUsuarioClienteIdCliente() {
-        return usuarioClienteIdCliente;
+    public Long getUsuarioRolIdRol() {
+        return usuarioRolIdRol;
     }
 
-    public void setUsuarioClienteIdCliente(Long usuarioClienteIdCliente) {
-        this.usuarioClienteIdCliente = usuarioClienteIdCliente;
+    public void setUsuarioRolIdRol(Long usuarioRolIdRol) {
+        this.usuarioRolIdRol = usuarioRolIdRol;
     }
 }
