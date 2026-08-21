@@ -26,12 +26,10 @@ public class Contacto {
     @Column(name = "mensaje", length = 500, nullable = false)
     private String mensaje;
 
-    // FK real hacia Usuario.id_usuario
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Usuario_id_usuario", referencedColumnName = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    // Columna adicional del diagrama (referencia lógica, no PK independiente)
     @Column(name = "Usuario_cliente_id_cliente")
     private Long usuarioClienteIdCliente;
 
@@ -39,7 +37,7 @@ public class Contacto {
     }
 
     public Contacto(String nombre, String correo, String telefono, String asunto,
-                    String mensaje, Usuario usuario, Integer usuarioClienteIdCliente) {
+                    String mensaje, Usuario usuario, Long usuarioClienteIdCliente) {
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;
@@ -51,11 +49,11 @@ public class Contacto {
 
     // Getters & Setters
 
-    public Integer getIdContacto() {
+    public Long getIdContacto() {
         return idContacto;
     }
 
-    public void setIdContacto(Integer idContacto) {
+    public void setIdContacto(Long idContacto) {
         this.idContacto = idContacto;
     }
 
@@ -107,11 +105,11 @@ public class Contacto {
         this.usuario = usuario;
     }
 
-    public Integer getUsuarioClienteIdCliente() {
+    public Long getUsuarioClienteIdCliente() {
         return usuarioClienteIdCliente;
     }
 
-    public void setUsuarioClienteIdCliente(Integer usuarioClienteIdCliente) {
+    public void setUsuarioClienteIdCliente(Long usuarioClienteIdCliente) {
         this.usuarioClienteIdCliente = usuarioClienteIdCliente;
     }
 }
