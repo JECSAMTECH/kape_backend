@@ -41,7 +41,7 @@ public class CarritoHasCafeService {
     }
 
     @Transactional
-    public CarritoHasCafe actualizarCantidad(Long id, Integer cantidad) {
+    public CarritoHasCafe actualizarCantidad(Long id, Long cantidad) {
         CarritoHasCafe item = carritoHasCafeRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item de carrito no encontrado"));
         item.setCantidad(cantidad);

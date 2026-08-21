@@ -25,5 +25,5 @@ public class CarritoHasCafe {
     private Long cafeId;
 
     @Column(nullable = false)
-    private Integer cantidad;
+    private Long cantidad;
 }
