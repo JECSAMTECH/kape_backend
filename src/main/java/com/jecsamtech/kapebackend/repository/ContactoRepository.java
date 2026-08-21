@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ContactoRepository extends JpaRepository<Contacto, Long> {
 
-    // Buscar todos los contactos hechos por un usuario específico
+    // Buscar contactos por un usuario específico
     List<Contacto> findByUsuario_IdUsuario(Long idUsuario);
 
     // Buscar contactos por correo
