@@ -11,9 +11,6 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_pedido;
 
-    //laves foraneas id_usuario
-    //id_datos_envio
-
     @Column(nullable = false)
     private Long total;
 
@@ -36,22 +33,24 @@ public class Pedido {
     @Column(nullable = true)
     private Date fecha_recibido;
 
-    @JoinColumn(name = "id_usuario")
-    @OneToOne
-    private Long id_usuario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
-    @JoinColumn(name = "id_metodo_pago")
-    @OneToOne
-    private Long id_metodo_pago;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_metodo_pago", nullable = false)
+    private MetodoPago metodoPago;
 
-    @JoinColumn(name = "id_direccion")
-    @OneToOne
-    private Long id_direccion;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_direccion", nullable = false)
+    private Direccion direccion;
 
     public Pedido() {
     }
 
-    public Pedido(Long id_pedido, Long total, Estatus estatus, String num_telefono, TypoEnvio typo_envio, Date fecha_pedido, Date fecha_envio, Date fecha_recibido, Long id_usuario, Long id_metodo_pago, Long id_direccion) {
+    public Pedido(Long id_pedido, Long total, Estatus estatus, String num_telefono, TypoEnvio typo_envio,
+                  Date fecha_pedido, Date fecha_envio, Date fecha_recibido,
+                  Usuario usuario, MetodoPago metodoPago, Direccion direccion) {
         this.id_pedido = id_pedido;
         this.total = total;
         this.estatus = estatus;
@@ -60,9 +59,9 @@ public class Pedido {
         this.fecha_pedido = fecha_pedido;
         this.fecha_envio = fecha_envio;
         this.fecha_recibido = fecha_recibido;
-        this.id_usuario = id_usuario;
-        this.id_metodo_pago = id_metodo_pago;
-        this.id_direccion = id_direccion;
+        this.usuario = usuario;
+        this.metodoPago = metodoPago;
+        this.direccion = direccion;
     }
 
     public Long getId_pedido() {
@@ -129,28 +128,28 @@ public class Pedido {
         this.fecha_recibido = fecha_recibido;
     }
 
-    public Long getId_usuario() {
-        return id_usuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Long getId_metodo_pago() {
-        return id_metodo_pago;
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
     }
 
-    public void setId_metodo_pago(Long id_metodo_pago) {
-        this.id_metodo_pago = id_metodo_pago;
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
     }
 
-    public Long getId_direccion() {
-        return id_direccion;
+    public Direccion getDireccion() {
+        return direccion;
     }
 
-    public void setId_direccion(Long id_direccion) {
-        this.id_direccion = id_direccion;
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
 
     @Override
@@ -164,9 +163,9 @@ public class Pedido {
                 ", fecha_pedido=" + fecha_pedido +
                 ", fecha_envio=" + fecha_envio +
                 ", fecha_recibido=" + fecha_recibido +
-                ", id_usuario=" + id_usuario +
-                ", id_metodo_pago=" + id_metodo_pago +
-                ", id_direccion=" + id_direccion +
+                ", usuario=" + (usuario != null ? usuario.getIdUsuario() : null) +
+                ", metodoPago=" + (metodoPago != null ? metodoPago.getIdMetodoPago() : null) +
+                ", direccion=" + (direccion != null ? direccion.getId_direccion() : null) +
                 '}';
     }
 }
