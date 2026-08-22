@@ -21,13 +21,13 @@ public class Resenia {
     @Column(name = "id_resenias")
     private Long idResenias;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false )
-    private Long idUsuario;
+    private Usuario usuario;
 
     @OneToOne
     @JoinColumn(name = "id_producto", nullable = false)
-    private Long idProducto;
+    private Cafe cafe;
 
     @Column(name = "calificacion", nullable = false)
     private Integer calificacion;
@@ -37,6 +37,5 @@ public class Resenia {
 
     @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
-
 
 }
