@@ -18,16 +18,20 @@ public class Resenia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_resenias")
-    private Long idResenias;
+    @Column(name = "id_resenia")
+    private Long idResenia;
 
+    /*
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false )
+    @JoinColumn(name = "idDetallePedido", nullable = false )
     private Usuario usuario;
+    */
 
+    /*
     @OneToOne
-    @JoinColumn(name = "id_producto", nullable = false)
+    @JoinColumn(name = "id_cafe", nullable = false)
     private Cafe cafe;
+    */
 
     @Column(name = "calificacion", nullable = false)
     private Integer calificacion;
@@ -37,5 +41,9 @@ public class Resenia {
 
     @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
+
+    @OneToOne
+    @JoinColumn(name = "idDetallePedido", nullable = false)
+    private DetallePedido detallePedido;
 
 }
