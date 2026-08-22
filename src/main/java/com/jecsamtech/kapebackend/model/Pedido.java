@@ -16,41 +16,42 @@ import java.util.Date;
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pedido")
     private Long idPedido;
 
-    @Column(nullable = false)
+    @Column(name = "total", nullable = false)
     private Long total;
 
-    @Column(nullable = false)
+    @Column(name = "estatus", nullable = false)
     @Enumerated(EnumType.STRING)
     private Estatus estatus;
 
-    @Column(nullable = false)
+    @Column(name = "num_telefono", nullable = false)
     private String numTelefono;
 
-    @Column(nullable = false)
+    @Column(name = "typo_envio", nullable = false)
     private TypoEnvio typoEnvio;
 
-    @Column(nullable = false)
+    @Column(name = "fecha_pedido", nullable = false)
     private Date fechaPedido;
 
-    @Column(nullable = true)
+    @Column(name = "fecha_envio", nullable = true)
     private Date fechaEnvio;
 
-    @Column(nullable = true)
-    private Date fechaRrecibido;
+    @Column(name = "fecha_recibido", nullable = true)
+    private Date fechaRecibido;
 
     //lave foranea id_usuario
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "id_usuario")
     @OneToOne
     private Long idUsuario;
 
     //id_datos_envio
-    @JoinColumn(name = "idMetodoPago")
+    @JoinColumn(name = "id_metodoPago")
     @OneToOne
     private Long idMetodoPago;
 
-    @JoinColumn(name = "idDireccion")
+    @JoinColumn(name = "id_direccion")
     @OneToOne
     private Long idDireccion;
 
