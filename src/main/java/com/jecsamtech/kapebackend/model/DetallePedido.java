@@ -1,38 +1,35 @@
 package com.jecsamtech.kapebackend.model;
 
 import jakarta.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "detalle_pedido")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DetallePedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idDetallePedido;
+    private Long idDetallePedido;
 
     @ManyToOne
-    @JoinColumn(name = "idCafe", nullable = false)
+    @JoinColumn(name = "id_cafe", nullable = false)
     private Cafe cafe;
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idPedido;
-
     @ManyToOne
-    @JoinColumn(name = "idPedido", nullable = false)
-    private Pedido cafe;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idResenia;
+    @JoinColumn(name = "id_pedido", nullable = false)
+    private Pedido pedido;
 
     @OneToOne
-    @JoinColumn(name = "idCafe", nullable = false)
-    private Cafe cafe;
+    @JoinColumn(name = "id_resenias", nullable = false)
+    private Resenia resenia;
 
-    private Cafe cafe;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "molienda", nullable = false)
+    private Molienda molienda;
 
 }

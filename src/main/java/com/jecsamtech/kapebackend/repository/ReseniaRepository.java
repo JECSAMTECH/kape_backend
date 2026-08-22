@@ -11,5 +11,5 @@ public interface ReseniaRepository extends JpaRepository<Resenia, Long> {
 
 
     List<Resenia> findByIdProducto(Long idProducto);
-    List<Resenia> findByIdCliente(Long idCliente);
+    List<Resenia> findByIdCliente(Long idUsuario);
 }
