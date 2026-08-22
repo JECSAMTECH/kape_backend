@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class Direccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_direccion", nullable = false)
     private Long idDireccion;
 
     @ManyToOne
