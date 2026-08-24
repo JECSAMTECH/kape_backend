@@ -1,171 +1,69 @@
 package com.jecsamtech.kapebackend.model;
 
 import jakarta.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
 @Table(name = "Pedido")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Pedido {
+
+    // id_pedido
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pedido;
+    @Column(name = "id_pedido")
+    private Long idPedido;
 
-    @Column(nullable = false)
+    // total
+    @Column(name = "total", nullable = false)
     private Long total;
 
-    @Column(nullable = false)
+    // estatus (enum)
+    @Column(name = "estatus", nullable = false)
     @Enumerated(EnumType.STRING)
     private Estatus estatus;
 
-    @Column(nullable = false)
-    private String num_telefono;
+    // num_telefono
+    @Column(name = "num_telefono", nullable = false)
+    private String numTelefono;
 
-    @Column(nullable = false)
-    private TypoEnvio typo_envio;
+    // typo_envio (enum)
+    @Column(name = "typo_envio", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypoEnvio typoEnvio;
 
-    @Column(nullable = false)
-    private Date fecha_pedido;
+    // fecha_pedido
+    @Column(name = "fecha_pedido", nullable = false)
+    private Date fechaPedido;
 
-    @Column(nullable = true)
-    private Date fecha_envio;
+    // fecha_envio
+    @Column(name = "fecha_envio")
+    private Date fechaEnvio;
 
-    @Column(nullable = true)
-    private Date fecha_recibido;
+    // fecha_recibido
+    @Column(name = "fecha_recibido")
+    private Date fechaRecibido;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    // llave foranea id_usuario
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario idUsuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_metodo_pago", nullable = false)
-    private MetodoPago metodoPago;
+    // llave foranea id_datos_envio
+    @OneToOne
+    @JoinColumn(name = "id_metodoPago")
+    private MetodoPago idMetodoPago;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_direccion", nullable = false)
-    private Direccion direccion;
+    // llave foranea id_direccion
+    @OneToOne
+    @JoinColumn(name = "id_direccion")
+    private Direccion idDireccion;
 
-    public Pedido() {
-    }
-
-    public Pedido(Long id_pedido, Long total, Estatus estatus, String num_telefono, TypoEnvio typo_envio,
-                  Date fecha_pedido, Date fecha_envio, Date fecha_recibido,
-                  Usuario usuario, MetodoPago metodoPago, Direccion direccion) {
-        this.id_pedido = id_pedido;
-        this.total = total;
-        this.estatus = estatus;
-        this.num_telefono = num_telefono;
-        this.typo_envio = typo_envio;
-        this.fecha_pedido = fecha_pedido;
-        this.fecha_envio = fecha_envio;
-        this.fecha_recibido = fecha_recibido;
-        this.usuario = usuario;
-        this.metodoPago = metodoPago;
-        this.direccion = direccion;
-    }
-
-    public Long getId_pedido() {
-        return id_pedido;
-    }
-
-    public void setId_pedido(Long id_pedido) {
-        this.id_pedido = id_pedido;
-    }
-
-    public Long getTotal() {
-        return total;
-    }
-
-    public void setTotal(Long total) {
-        this.total = total;
-    }
-
-    public Estatus getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(Estatus estatus) {
-        this.estatus = estatus;
-    }
-
-    public String getNum_telefono() {
-        return num_telefono;
-    }
-
-    public void setNum_telefono(String num_telefono) {
-        this.num_telefono = num_telefono;
-    }
-
-    public TypoEnvio getTypo_envio() {
-        return typo_envio;
-    }
-
-    public void setTypo_envio(TypoEnvio typo_envio) {
-        this.typo_envio = typo_envio;
-    }
-
-    public Date getFecha_pedido() {
-        return fecha_pedido;
-    }
-
-    public void setFecha_pedido(Date fecha_pedido) {
-        this.fecha_pedido = fecha_pedido;
-    }
-
-    public Date getFecha_envio() {
-        return fecha_envio;
-    }
-
-    public void setFecha_envio(Date fecha_envio) {
-        this.fecha_envio = fecha_envio;
-    }
-
-    public Date getFecha_recibido() {
-        return fecha_recibido;
-    }
-
-    public void setFecha_recibido(Date fecha_recibido) {
-        this.fecha_recibido = fecha_recibido;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public MetodoPago getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(MetodoPago metodoPago) {
-        this.metodoPago = metodoPago;
-    }
-
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "id_pedido=" + id_pedido +
-                ", total=" + total +
-                ", estatus=" + estatus +
-                ", num_telefono='" + num_telefono + '\'' +
-                ", typo_envio=" + typo_envio +
-                ", fecha_pedido=" + fecha_pedido +
-                ", fecha_envio=" + fecha_envio +
-                ", fecha_recibido=" + fecha_recibido +
-                ", usuario=" + (usuario != null ? usuario.getIdUsuario() : null) +
-                ", metodoPago=" + (metodoPago != null ? metodoPago.getIdMetodoPago() : null) +
-                ", direccion=" + (direccion != null ? direccion.getId_direccion() : null) +
-                '}';
-    }
 }
