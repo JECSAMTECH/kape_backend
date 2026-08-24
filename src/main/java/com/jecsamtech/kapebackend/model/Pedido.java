@@ -52,12 +52,12 @@ public class Pedido {
     private Date fechaRecibido;
 
     // llave foranea id_usuario
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     // llave foranea id_datos_envio
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_metodoPago")
     private MetodoPago metodoPago;
 
