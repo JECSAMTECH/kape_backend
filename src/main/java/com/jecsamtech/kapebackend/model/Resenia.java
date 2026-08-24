@@ -18,16 +18,8 @@ public class Resenia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_resenias")
-    private Long idResenias;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false )
-    private Usuario usuario;
-
-    @OneToOne
-    @JoinColumn(name = "id_producto", nullable = false)
-    private Cafe cafe;
+    @Column(name = "id_resenia")
+    private Long idResenia;
 
     @Column(name = "calificacion", nullable = false)
     private Integer calificacion;
@@ -38,4 +30,6 @@ public class Resenia {
     @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
 
+    @OneToOne(mappedBy = "resenia")
+    private DetallePedido detallePedido;
 }

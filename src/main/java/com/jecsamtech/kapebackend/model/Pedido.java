@@ -54,16 +54,16 @@ public class Pedido {
     // llave foranea id_usuario
     @OneToOne
     @JoinColumn(name = "id_usuario")
-    private Usuario idUsuario;
+    private Usuario usuario;
 
     // llave foranea id_datos_envio
     @OneToOne
     @JoinColumn(name = "id_metodoPago")
-    private MetodoPago idMetodoPago;
+    private MetodoPago metodoPago;
 
     // llave foranea id_direccion
     @OneToOne
     @JoinColumn(name = "id_direccion")
-    private Direccion idDireccion;
+    private Direccion direccion;
 
 }
