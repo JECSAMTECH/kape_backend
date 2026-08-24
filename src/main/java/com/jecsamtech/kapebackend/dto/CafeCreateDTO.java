@@ -1,9 +1,11 @@
 package com.jecsamtech.kapebackend.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
+@Data
 public class CafeCreateDTO {
 
     @NotBlank(message = "El nombre del producto no puede estar vacío")
