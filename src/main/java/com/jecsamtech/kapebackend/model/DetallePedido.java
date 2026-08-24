@@ -14,7 +14,7 @@ public class DetallePedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_detallePedido")
+    @Column(name = "id_detalle_pedido")
     private Long idDetallePedido;
 
     @ManyToOne
@@ -29,10 +29,8 @@ public class DetallePedido {
     @JoinColumn(name = "id_resenias", nullable = false)
     private Resenia resenia;
 
-    @Column(name = "molienda", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Molienda molienda;
+    @Column(name = "molienda", nullable = false)
+     private Molienda molienda;
 
-  
-    }
 }
