@@ -18,11 +18,13 @@ public class CarritoHasCafe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "carrito_id", nullable = false)
-    private Long carritoId;
+    @ManyToOne
+    @JoinColumn(name = "carrito_id", nullable = false)
+    private Carrito carrito;
 
-    @Column(name = "cafe_id", nullable = false)
-    private Long cafeId;
+    @ManyToOne
+    @JoinColumn(name = "cafe_id", nullable = false)
+    private Cafe cafe;
 
     @Column(nullable = false)
     private Long cantidad;

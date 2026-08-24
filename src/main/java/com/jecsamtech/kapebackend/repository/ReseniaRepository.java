@@ -12,6 +12,8 @@ import java.util.List;
 public interface ReseniaRepository extends JpaRepository<Resenia, Long> {
 
 
-    List<Resenia> findByCafe(Cafe cafe);
-    List<Resenia> findByUsuario(Usuario usuario);
+    // List<Resenia> findByIdProducto(Cafe idCafe); // original
+    // List<Resenia> findByDetallePedido_Cafe_IdCafe(Long idCafe);
+    // List<Resenia> findByIdCliente(Usuario idUsuario); // origin
+    // List<Resenia> findByDetallePedido_Pedido_Usuario_IdUsuario(Long idUsuario);
 }
