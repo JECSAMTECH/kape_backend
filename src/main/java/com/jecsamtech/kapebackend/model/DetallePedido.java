@@ -33,4 +33,6 @@ public class DetallePedido {
     @Enumerated(EnumType.STRING)
     private Molienda molienda;
 
+  
+    }
 }
