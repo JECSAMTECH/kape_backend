@@ -14,6 +14,7 @@ public class DetallePedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_detallePedido")
     private Long idDetallePedido;
 
     @ManyToOne
@@ -32,4 +33,6 @@ public class DetallePedido {
     @Column(name = "molienda", nullable = false)
     private Molienda molienda;
 
+  
+    }
 }
