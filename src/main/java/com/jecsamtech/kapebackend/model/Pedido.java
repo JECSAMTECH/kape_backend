@@ -62,7 +62,7 @@ public class Pedido {
     private MetodoPago metodoPago;
 
     // llave foranea id_direccion
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_direccion")
     private Direccion direccion;
 
