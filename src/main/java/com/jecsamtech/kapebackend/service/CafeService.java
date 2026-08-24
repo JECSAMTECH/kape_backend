@@ -128,7 +128,7 @@ public class CafeService {
     }
 
     @Transactional(readOnly = true)
-    public List<CafeResponseDTO> searchByRangePrice(
+    public List<CafeResponseDTO> searchByPriceRange(
             BigDecimal priceMin,
             BigDecimal priceMax
     ) {
