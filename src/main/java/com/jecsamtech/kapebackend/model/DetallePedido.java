@@ -29,8 +29,8 @@ public class DetallePedido {
     @JoinColumn(name = "id_resenias", nullable = false)
     private Resenia resenia;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "molienda", nullable = false)
-     private Molienda molienda;
+    @Enumerated(EnumType.STRING)
+    private Molienda molienda;
 
 }
