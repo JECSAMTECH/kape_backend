@@ -1,12 +1,14 @@
 package com.jecsamtech.kapebackend.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class CafeResponseDTO {
 
     private Long idCafe;
