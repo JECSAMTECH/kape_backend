@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 
-public class DireccionDTO {
+public class DireccionRequestDTO {
     private Long idDireccion;
 
     @NotBlank(message = "Calle no puede estar vacía")
