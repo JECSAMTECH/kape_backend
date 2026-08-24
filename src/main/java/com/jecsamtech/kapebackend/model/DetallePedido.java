@@ -33,6 +33,4 @@ public class DetallePedido {
     @Column(name = "molienda", nullable = false)
     private Molienda molienda;
 
-  
-    }
 }

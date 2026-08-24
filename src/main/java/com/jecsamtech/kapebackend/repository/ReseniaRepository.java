@@ -1,6 +1,8 @@
 package com.jecsamtech.kapebackend.repository;
 
+import com.jecsamtech.kapebackend.model.Cafe;
 import com.jecsamtech.kapebackend.model.Resenia;
+import com.jecsamtech.kapebackend.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,6 @@ import java.util.List;
 public interface ReseniaRepository extends JpaRepository<Resenia, Long> {
 
 
-    List<Resenia> findByIdProducto(Long idProducto);
-    List<Resenia> findByIdCliente(Long idUsuario);
+    List<Resenia> findByCafe(Cafe cafe);
+    List<Resenia> findByUsuario(Usuario usuario);
 }
