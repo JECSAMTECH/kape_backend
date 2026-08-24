@@ -27,12 +27,17 @@ public class CarritoHasCafeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CarritoHasCafe agregar(@Valid @RequestBody CarritoHasCafeDTO dto) {
+    public CarritoHasCafe agregar(
+            @Valid @RequestBody CarritoHasCafeDTO dto
+    ) {
         return carritoHasCafeService.agregar(dto);
     }
 
     @PutMapping("/{id}")
-    public CarritoHasCafe actualizarCantidad(@PathVariable Long id, @Valid @RequestBody ActualizarCantidadDTO dto) {
+    public CarritoHasCafe actualizarCantidad(
+            @PathVariable Long id,
+            @Valid @RequestBody ActualizarCantidadDTO dto
+    ) {
         return carritoHasCafeService.actualizarCantidad(id, dto.getCantidad());
     }
 
