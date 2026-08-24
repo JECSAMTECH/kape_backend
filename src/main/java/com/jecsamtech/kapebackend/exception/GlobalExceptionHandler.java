@@ -22,6 +22,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(httpError, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<HttpError> resourceAlreadyExistsException(ResourceAlreadyExistsException err){
+
+        HttpError httpError = new HttpError(HttpStatus.CONFLICT.value(), err.getMessage(),
+                LocalDateTime.now());
+
+        return new ResponseEntity<>(httpError, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<HttpError> notValidException(MethodArgumentNotValidException err){
 
