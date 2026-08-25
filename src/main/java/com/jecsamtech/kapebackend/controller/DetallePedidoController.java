@@ -13,35 +13,41 @@ import java.util.List;
 @RequestMapping("/api/detalles-pedido")
 public class DetallePedidoController {
 
-    private final DetallePedidoService service;
+    private final DetallePedidoService detallePedidoService;
 
-    public DetallePedidoController(DetallePedidoService service) {
-        this.service = service;
+    public DetallePedidoController(DetallePedidoService detallePedidoService) {
+        this.detallePedidoService = detallePedidoService;
     }
 
     @GetMapping
     public ResponseEntity<List<DetallePedidoDTO>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(detallePedidoService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DetallePedidoDTO> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.ok(detallePedidoService.findById(id));
+    }
+
+    @GetMapping("/pedido/{pedidoId}")
+    public ResponseEntity<List<DetallePedidoDTO>> getByPedidoId(@PathVariable Long pedidoId) {
+        return ResponseEntity.ok(detallePedidoService.findByPedidoId(pedidoId));
     }
 
     @PostMapping
     public ResponseEntity<DetallePedidoDTO> create(@Valid @RequestBody DetallePedidoDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(dto));
+        DetallePedidoDTO created = detallePedidoService.save(dto);
+        return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<DetallePedidoDTO> update(@PathVariable Long id, @Valid @RequestBody DetallePedidoDTO dto) {
-        return ResponseEntity.ok(service.update(id, dto));
+        return ResponseEntity.ok(detallePedidoService.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
+        detallePedidoService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
