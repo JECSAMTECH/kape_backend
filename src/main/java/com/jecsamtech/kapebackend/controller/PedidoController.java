@@ -39,10 +39,10 @@ public class PedidoController {
     }
 
     //@PreAuthorize("hasRole('CLIENTE')")
-    @GetMapping("/mis-pedidos")
+    /*@GetMapping("/mis-pedidos")
     public List<PedidoResponse> getMisPedidos() {
         return pedidoService.findMisPedidos();
-    }
+    }*/
 
     //@PreAuthorize("hasRole('ADMIN')") //
     @GetMapping("/usuario/{idUsuario}")
