@@ -16,11 +16,4 @@ public class CarritoDTO {
     private LocalDateTime fechaActualizacion;
     private Long idUsuario;
 
-    // Constructor explícito de 4 parámetros para evitar que marque en rojo la Service
-    public CarritoDTO(Long idCarrito, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Long idUsuario) {
-        this.idCarrito = idCarrito;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaActualizacion = fechaActualizacion;
-        this.idUsuario = idUsuario;
-    }
 }

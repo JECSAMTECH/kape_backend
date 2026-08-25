@@ -4,6 +4,7 @@ import com.jecsamtech.kapebackend.dto.CarritoDTO;
 import com.jecsamtech.kapebackend.model.Carrito;
 import com.jecsamtech.kapebackend.model.Usuario;
 import com.jecsamtech.kapebackend.repository.CarritoRepository;
+import com.jecsamtech.kapebackend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,12 @@ import java.util.Optional;
 public class CarritoService {
 
     private final CarritoRepository carritoRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    public CarritoService(CarritoRepository carritoRepository) {
+    public CarritoService(CarritoRepository carritoRepository, UsuarioRepository usuarioRepository) {
         this.carritoRepository = carritoRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     public Optional<CarritoDTO> obtenerPorUsuarioId(Long usuarioId) {
@@ -26,12 +29,11 @@ public class CarritoService {
     }
 
     public CarritoDTO crearCarrito(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + usuarioId));
+
         Carrito carrito = new Carrito();
-
-        Usuario usuario = new Usuario();
-        usuario.setIdUsuario(usuarioId);
         carrito.setUsuario(usuario);
-
         carrito.setFechaCreacion(LocalDateTime.now());
         carrito.setFechaActualizacion(LocalDateTime.now());
 
@@ -40,12 +42,17 @@ public class CarritoService {
     }
 
     private CarritoDTO convertirADTO(Carrito carrito) {
-        Long idUsuario = (carrito.getUsuario() != null) ? carrito.getUsuario().getIdUsuario() : null;
-        return new CarritoDTO(
-                carrito.getIdCarrito(),
-                carrito.getFechaCreacion(),
-                carrito.getFechaActualizacion(),
-                idUsuario
-        );
+        Long idUsuario = null;
+        if (carrito.getUsuario() != null) {
+            idUsuario = carrito.getUsuario().getIdUsuario();
+        }
+
+        CarritoDTO dto = new CarritoDTO();
+        dto.setIdCarrito(carrito.getIdCarrito());
+        dto.setFechaCreacion(carrito.getFechaCreacion());
+        dto.setFechaActualizacion(carrito.getFechaActualizacion());
+        dto.setIdUsuario(idUsuario);
+
+        return dto;
     }
 }
