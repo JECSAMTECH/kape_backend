@@ -36,9 +36,8 @@ public class DetallePedido {
     private Molienda molienda;
 
     @Column(name = "cantidad", nullable = false)
-    private BigDecimal cantidad;
+    private Long cantidad;
 
-    @Column(name = "precio_unitario", nullable = false)
+    @Column(name = "precio_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal precioUnitario;
-
 }
