@@ -20,11 +20,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder, RolRepository rolRepository) {
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, RolRepository rolRepository) {
         this.usuarioRepository = usuarioRepository;
-        this.passwordEncoder = passwordEncoder;
         this.rolRepository = rolRepository;
     }
 
@@ -35,7 +34,7 @@ public class UsuarioServiceImpl implements UsuarioService{
             throw new ResourceAlreadyExistsException("El email ya existe, pruebe uno distinto");
         }
 
-        String encodedPassword = passwordEncoder.encode(usuarioRequest.getContrasenia());
+        //String encodedPassword = passwordEncoder.encode(usuarioRequest.getContrasenia());
 
         Rol clientRole = rolRepository.findByNombreRol("CLIENTE")
                 .orElseThrow(()-> new ResourceNotFoundException("No se encontro el rol \"Cliente\""));
@@ -46,7 +45,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setNombre(usuarioRequest.getNombre());
         usuario.setCorreo(usuarioRequest.getCorreo());
         usuario.setRol(clientRole);
-        usuario.setContrasenia(encodedPassword);
+        usuario.setContrasenia(usuarioRequest.getContrasenia());
         usuario.setFechaRegistro(registrationDate);
 
         Usuario savedUsuario = usuarioRepository.save(usuario);
@@ -60,7 +59,7 @@ public class UsuarioServiceImpl implements UsuarioService{
             throw new ResourceAlreadyExistsException("El email ya existe, pruebe uno distinto");
         }
 
-        String encodedPassword = passwordEncoder.encode(usuarioAdminRequest.getContrasenia());
+        //String encodedPassword = passwordEncoder.encode(usuarioAdminRequest.getContrasenia());
 
         Rol clientRole = rolRepository.findByNombreRol(usuarioAdminRequest.getNombreRol())
                 .orElseThrow(()-> new ResourceNotFoundException("No se encontro el rol "+usuarioAdminRequest.getNombreRol()));
@@ -71,7 +70,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setNombre(usuarioAdminRequest.getNombre());
         usuario.setCorreo(usuarioAdminRequest.getCorreo());
         usuario.setRol(clientRole);
-        usuario.setContrasenia(encodedPassword);
+        usuario.setContrasenia(usuarioAdminRequest.getContrasenia());
         usuario.setFechaRegistro(registrationDate);
 
         Usuario savedUsuario = usuarioRepository.save(usuario);
