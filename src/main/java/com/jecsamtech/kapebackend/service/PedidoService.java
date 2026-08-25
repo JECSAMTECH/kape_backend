@@ -37,7 +37,17 @@ public class PedidoService {
                 .toList();
     }
 
-    // Buscar pedido por ID
+    // Buscar pedido por usuario (mis pedidos)
+    @Transactional(readOnly = true)
+    public List<PedidoResponse> findMisPedidos(Long idUsuario) { // temporal
+        return pedidoRepository
+                .findByUsuario_IdUsuario(idUsuario)
+                .stream()
+                .map(this::toResponseDTO)
+                .toList();
+    }
+
+    // Buscar pedido por Id (para admin agregar autorización)
     @Transactional(readOnly = true)
     public PedidoResponse findById(Long idPedido){
         return toResponseDTO(findEntityById(idPedido));
