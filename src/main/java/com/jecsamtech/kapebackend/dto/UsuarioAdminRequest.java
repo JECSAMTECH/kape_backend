@@ -9,10 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UsuarioRequest {
+public class UsuarioAdminRequest {
 
     @NotBlank(message = "El nombre no puede ir vacio")
     private String nombre;
+    @NotBlank(message = "El rol es obligatorio")
+    private String nombreRol;
     @NotBlank(message = "El correo no puede ir vacio")
     @Email(message = "Se requiere un formato de correo valido")
     private String correo;
