@@ -1,29 +1,29 @@
 package com.jecsamtech.kapebackend.dto;
 
-import com.jecsamtech.kapebackend.model.DetallePedido;
 import com.jecsamtech.kapebackend.model.Estatus;
 import com.jecsamtech.kapebackend.model.TypoEnvio;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PedidoResponse {
 
     private Long idPedido;
-    private Long total;
+    private BigDecimal total;
     private Estatus estatus;
     private String numTelefono;
     private TypoEnvio typoEnvio;
-    private LocalDateTime fechaPedido;
-    private LocalDateTime fechaEnvio;
-    private LocalDateTime fechaRecibido;
+    private Date fechaPedido;
+    private Date fechaEnvio;
+    private Date fechaRecibido;
 
     private Long idUsuario;
     private Long idDireccion;

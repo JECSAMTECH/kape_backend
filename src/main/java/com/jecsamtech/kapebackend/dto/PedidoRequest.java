@@ -1,18 +1,18 @@
 package com.jecsamtech.kapebackend.dto;
 
 import com.jecsamtech.kapebackend.model.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PedidoRequest {
     private String numTelefono;
     private TypoEnvio typoEnvio;
-    private Long metodoPago;
-    private Long direccion;
-    //private Long idUsuario;
+    private Long idMetodoPago;
+    private Long idDireccion;
+    private Long idUsuario; // temporal
 
 }

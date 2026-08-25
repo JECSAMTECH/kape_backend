@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "detalle_pedido")
 @Data
@@ -32,5 +34,11 @@ public class DetallePedido {
     @Column(name = "molienda", nullable = false)
     @Enumerated(EnumType.STRING)
     private Molienda molienda;
+
+    @Column(name = "cantidad", nullable = false)
+    private BigDecimal cantidad;
+
+    @Column(name = "precio_unitario", nullable = false)
+    private BigDecimal precioUnitario;
 
 }
