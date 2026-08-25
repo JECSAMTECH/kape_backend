@@ -5,6 +5,7 @@ import com.jecsamtech.kapebackend.dto.DireccionResponseDTO;
 import com.jecsamtech.kapebackend.model.Direccion;
 import com.jecsamtech.kapebackend.model.Usuario;
 import com.jecsamtech.kapebackend.repository.DireccionRepository;
+import com.jecsamtech.kapebackend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,24 +19,13 @@ import java.util.List;
 public class DireccionService {
 
     private final DireccionRepository direccionRepository;
-    private final UsuarioService usuarioService;
-
-    @Transactional(readOnly = true)
-    public List<DireccionResponseDTO> findAll() {
-        return direccionRepository.findAll()
-                .stream()
-                .map(this::toResponseDTO)
-                .toList();
-    }
-
-    @Transactional(readOnly = true)
-    public DireccionResponseDTO findById(Long id) {
-        return toResponseDTO(findEntityById(id));
-    }
+    private final UsuarioRepository usuarioRepository;
 
     @Transactional
     public DireccionResponseDTO create(DireccionRequestDTO dto) {
-        Usuario usuario = usuarioService.obtenerUsuarioAutenticado();
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
         Direccion direccion = Direccion.builder()
                 .usuario(usuario)
@@ -49,6 +39,19 @@ public class DireccionService {
                 .build();
 
         return toResponseDTO(direccionRepository.save(direccion));
+    }
+
+    @Transactional(readOnly = true)
+    public List<DireccionResponseDTO> findAll() {
+        return direccionRepository.findAll()
+                .stream()
+                .map(this::toResponseDTO)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public DireccionResponseDTO findById(Long id) {
+        return toResponseDTO(findEntityById(id));
     }
 
     @Transactional
