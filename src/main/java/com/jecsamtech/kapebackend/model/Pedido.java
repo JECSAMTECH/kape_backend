@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -23,7 +25,7 @@ public class Pedido {
 
     // total
     @Column(name = "total", nullable = false)
-    private Long total;
+    private BigDecimal total;
 
     // estatus (enum)
     @Column(name = "estatus", nullable = false)
@@ -58,7 +60,7 @@ public class Pedido {
 
     // llave foranea id_datos_envio
     @ManyToOne
-    @JoinColumn(name = "id_metodoPago")
+    @JoinColumn(name = "id_metodo_pago")
     private MetodoPago metodoPago;
 
     // llave foranea id_direccion
