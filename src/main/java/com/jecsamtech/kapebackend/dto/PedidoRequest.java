@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PedidoRequest {
-    private String numTelefono;
     private TipoEnvio tipoEnvio;
     private Long idMetodoPago;
     private Long idDireccion;

@@ -19,7 +19,6 @@ public class PedidoResponse {
     private Long idPedido;
     private BigDecimal total;
     private Estatus estatus;
-    private String numTelefono;
     private TipoEnvio tipoEnvio;
     private Date fechaPedido;
     private Date fechaEnvio;
