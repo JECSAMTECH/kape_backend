@@ -2,12 +2,13 @@ package com.jecsamtech.kapebackend.controller;
 
 import com.jecsamtech.kapebackend.dto.PedidoRequest;
 import com.jecsamtech.kapebackend.dto.PedidoResponse;
+import com.jecsamtech.kapebackend.model.Estatus;
 import com.jecsamtech.kapebackend.service.PedidoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +27,17 @@ public class PedidoController {
         return pedidoService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idPedido}")
     public PedidoResponse getById(@PathVariable Long idPedido){
         return pedidoService.findById(idPedido);
+    }
+
+    @PatchMapping("/{idPedido}/estatus")
+    public PedidoResponse updateEstatus(
+            @PathVariable Long idPedido,
+            @RequestParam Estatus estatus) {
+
+        return pedidoService.updateEstatus(idPedido, estatus);
     }
 
     @PostMapping
