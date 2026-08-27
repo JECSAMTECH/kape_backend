@@ -37,9 +37,9 @@ public class Pedido {
     private String numTelefono;
 
     // typo_envio (enum)
-    @Column(name = "typo_envio", nullable = false)
+    @Column(name = "tipo_envio", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TypoEnvio typoEnvio;
+    private TipoEnvio tipoEnvio;
 
     // fecha_pedido
     @Column(name = "fecha_pedido", nullable = false)

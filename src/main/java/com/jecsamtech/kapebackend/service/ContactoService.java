@@ -59,7 +59,7 @@ public class ContactoService {
         contacto.setAsunto(request.getAsunto());
         contacto.setMensaje(request.getMensaje());
         contacto.setUsuario(usuario);
-        contacto.setUsuarioRolIdRol(request.getUsuarioRolIdRol());
+        //contacto.setUsuarioRolIdRol(request.getUsuarioRolIdRol());
 
         return ContactoResponse.fromEntity(contactoRepository.save(contacto));
     }

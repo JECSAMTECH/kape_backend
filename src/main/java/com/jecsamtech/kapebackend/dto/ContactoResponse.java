@@ -19,7 +19,7 @@ public class ContactoResponse {
     private String asunto;
     private String mensaje;
     private Long usuarioId;
-    private Long usuarioRolIdRol;
+    //private Long usuarioRolIdRol;
 
     public static ContactoResponse fromEntity(Contacto contacto) {
         return new ContactoResponse(
@@ -29,8 +29,8 @@ public class ContactoResponse {
                 contacto.getTelefono(),
                 contacto.getAsunto(),
                 contacto.getMensaje(),
-                contacto.getUsuario() != null ? contacto.getUsuario().getIdUsuario() : null,
-                contacto.getUsuarioRolIdRol()
+                contacto.getUsuario() != null ? contacto.getUsuario().getIdUsuario() : null
+                //contacto.getUsuarioRolIdRol()
         );
     }
 }
