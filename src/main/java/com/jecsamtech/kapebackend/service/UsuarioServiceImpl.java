@@ -9,7 +9,7 @@ import com.jecsamtech.kapebackend.model.Rol;
 import com.jecsamtech.kapebackend.model.Usuario;
 import com.jecsamtech.kapebackend.repository.RolRepository;
 import com.jecsamtech.kapebackend.repository.UsuarioRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
