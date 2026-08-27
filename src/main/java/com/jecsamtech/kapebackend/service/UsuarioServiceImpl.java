@@ -47,6 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setRol(clientRole);
         usuario.setContrasenia(usuarioRequest.getContrasenia());
         usuario.setFechaRegistro(registrationDate);
+        usuario.setTelefono(usuarioRequest.getNumero());
 
         Usuario savedUsuario = usuarioRepository.save(usuario);
 
@@ -72,6 +73,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setRol(clientRole);
         usuario.setContrasenia(usuarioAdminRequest.getContrasenia());
         usuario.setFechaRegistro(registrationDate);
+
 
         Usuario savedUsuario = usuarioRepository.save(usuario);
 
@@ -105,7 +107,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     private UsuarioResponse convertToUsuarioResponse(Usuario usuario){
         return new UsuarioResponse(usuario.getIdUsuario(), usuario.getNombre(),
-                usuario.getCorreo(), usuario.getFechaRegistro(), usuario.getRol().getNombreRol());
+                usuario.getCorreo(), usuario.getFechaRegistro(), usuario.getRol().getNombreRol(), usuario.getTelefono());
     }
 
     private Usuario encontrarEntidadUsuarioPorId(Long usuarioId){
