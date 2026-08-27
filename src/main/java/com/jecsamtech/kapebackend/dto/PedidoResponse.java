@@ -1,7 +1,7 @@
 package com.jecsamtech.kapebackend.dto;
 
 import com.jecsamtech.kapebackend.model.Estatus;
-import com.jecsamtech.kapebackend.model.TypoEnvio;
+import com.jecsamtech.kapebackend.model.TipoEnvio;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class PedidoResponse {
     private BigDecimal total;
     private Estatus estatus;
     private String numTelefono;
-    private TypoEnvio typoEnvio;
+    private TipoEnvio tipoEnvio;
     private Date fechaPedido;
     private Date fechaEnvio;
     private Date fechaRecibido;

@@ -26,11 +26,11 @@ public class DetallePedido {
     @ManyToOne
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
-
+/*
     @OneToOne
     @JoinColumn(name = "id_resenias", nullable = false)
     private Resenia resenia;
-
+*/
     @Column(name = "molienda", nullable = false)
     @Enumerated(EnumType.STRING)
     private Molienda molienda;

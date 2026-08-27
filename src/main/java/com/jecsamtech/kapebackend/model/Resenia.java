@@ -29,7 +29,11 @@ public class Resenia {
 
     @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
-
+/*
     @OneToOne(mappedBy = "resenia")
+    private DetallePedido detallePedido;
+*/
+    @OneToOne
+    @JoinColumn(name = "id_detalle_pedido", nullable = false, unique = true)
     private DetallePedido detallePedido;
 }

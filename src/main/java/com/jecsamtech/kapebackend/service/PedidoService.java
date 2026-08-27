@@ -89,7 +89,7 @@ public class PedidoService {
                 .direccion(direccion)
                 .metodoPago(metodoPago)
                 .numTelefono(dto.getNumTelefono())
-                .typoEnvio(dto.getTypoEnvio())
+                .tipoEnvio(dto.getTipoEnvio())
                 // pone la fecha actual
                 .fechaPedido(new Date()) //verificar tipo de dato Date
                 //manda a pendiente por default
@@ -130,7 +130,7 @@ public class PedidoService {
                 .total(pedido.getTotal())
                 .estatus(pedido.getEstatus())
                 .numTelefono(pedido.getNumTelefono())
-                .typoEnvio(pedido.getTypoEnvio())
+                .tipoEnvio(pedido.getTipoEnvio())
                 .fechaPedido(pedido.getFechaPedido())
                 .fechaEnvio(pedido.getFechaEnvio())
                 .fechaRecibido(pedido.getFechaRecibido())

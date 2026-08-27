@@ -1,6 +1,6 @@
 package com.jecsamtech.kapebackend.model;
 
-public enum TypoEnvio {
+public enum TipoEnvio {
     ESTANDAR,
     EXPRESS,
     PLUS

@@ -23,16 +23,17 @@ public class Contacto {
     @Column(name = "asunto", length = 200, nullable = false)
     private String asunto;
 
-    @Column(name = "mensaje", length = 500, nullable = false)
+    @Column(name = "mensaje", length = 500)
     private String mensaje;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Usuario_id_usuario", referencedColumnName = "id_usuario", nullable = false)
+    @JoinColumn(name = "Usuario_id_usuario", referencedColumnName = "id_usuario") // usuario puede ser nullable
     private Usuario usuario;
-
+/*
+// cualquier persona puede ponerse en contacto con kape, no necesita tener una cuenta de usuario
     @Column(name = "Usuario_rol_id_rol")
     private Long usuarioRolIdRol;
-
+*/
     public Contacto() {
     }
 
@@ -44,7 +45,7 @@ public class Contacto {
         this.asunto = asunto;
         this.mensaje = mensaje;
         this.usuario = usuario;
-        this.usuarioRolIdRol = usuarioRolIdRol;
+        //this.usuarioRolIdRol = usuarioRolIdRol;
     }
 
     // Getters & Setters
@@ -105,11 +106,11 @@ public class Contacto {
         this.usuario = usuario;
     }
 
-    public Long getUsuarioRolIdRol() {
+   /* public Long getUsuarioRolIdRol() {
         return usuarioRolIdRol;
     }
 
     public void setUsuarioRolIdRol(Long usuarioRolIdRol) {
         this.usuarioRolIdRol = usuarioRolIdRol;
-    }
+    }*/
 }

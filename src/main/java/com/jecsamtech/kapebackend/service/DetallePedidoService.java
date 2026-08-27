@@ -69,7 +69,7 @@ public class DetallePedidoService {
         DetallePedido entity = new DetallePedido();
         entity.setCafe(cafe);
         entity.setPedido(pedido);
-        entity.setResenia(resenia);
+        //entity.setResenia(resenia);
         entity.setMolienda(dto.getMolienda());
         entity.setCantidad(dto.getCantidad());
         entity.setPrecioUnitario(dto.getPrecioUnitario());
@@ -93,12 +93,12 @@ public class DetallePedidoService {
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido no encontrado"));
             entity.setPedido(pedido);
         }
-
+/*
         if (!entity.getResenia().getIdResenia().equals(dto.getReseniaId())) {
             Resenia resenia = reseniaRepository.findById(dto.getReseniaId())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reseña no encontrada"));
             entity.setResenia(resenia);
-        }
+        }*/
 
         entity.setMolienda(dto.getMolienda());
         entity.setCantidad(dto.getCantidad());
@@ -121,7 +121,7 @@ public class DetallePedidoService {
                 .idDetallePedido(entity.getIdDetallePedido())
                 .cafeId(entity.getCafe().getIdCafe())
                 .pedidoId(entity.getPedido().getIdPedido())
-                .reseniaId(entity.getResenia().getIdResenia())
+                //.reseniaId(entity.getResenia().getIdResenia())
                 .molienda(entity.getMolienda())
                 .cantidad(entity.getCantidad())
                 .precioUnitario(entity.getPrecioUnitario())
