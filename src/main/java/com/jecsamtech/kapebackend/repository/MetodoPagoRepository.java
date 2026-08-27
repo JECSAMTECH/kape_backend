@@ -1,13 +1,11 @@
 package com.jecsamtech.kapebackend.repository;
-
-import com.jecsamtech.kapebackend.model.Carrito;
+import com.jecsamtech.kapebackend.model.MetodoPago;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface CarritoRepository extends JpaRepository<Carrito, Long> {
-
-    Optional<Carrito> findByUsuario_IdUsuario(Long idUsuario);
+public interface MetodoPagoRepository extends JpaRepository <MetodoPago, Long> {
+    Optional<MetodoPago> findByTipo(String tipo);
 }
