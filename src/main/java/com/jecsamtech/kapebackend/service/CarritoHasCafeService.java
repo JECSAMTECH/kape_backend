@@ -1,6 +1,7 @@
 package com.jecsamtech.kapebackend.service;
 
 import com.jecsamtech.kapebackend.dto.CarritoHasCafeDTO;
+import com.jecsamtech.kapebackend.dto.CarritoHasCafeResponseDTO;
 import com.jecsamtech.kapebackend.model.Cafe;
 import com.jecsamtech.kapebackend.model.Carrito;
 import com.jecsamtech.kapebackend.model.CarritoHasCafe;
@@ -32,12 +33,15 @@ public class CarritoHasCafeService {
     }
 
     @Transactional(readOnly = true)
-    public List<CarritoHasCafe> findByCarrito(Long carritoId) {
-        return carritoHasCafeRepository.findByCarrito_IdCarrito(carritoId);
+    public List<CarritoHasCafeResponseDTO> findByCarrito(Long carritoId) {
+        return carritoHasCafeRepository.findByCarrito_IdCarrito(carritoId)
+                .stream()
+                .map(this::toDTO)
+                .toList();
     }
 
     @Transactional
-    public CarritoHasCafe agregar(CarritoHasCafeDTO dto) {
+    public CarritoHasCafeResponseDTO agregar(CarritoHasCafeDTO dto) {
         if (dto.getCantidad() == null || dto.getCantidad() <= 0) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
@@ -55,7 +59,7 @@ public class CarritoHasCafeService {
                         HttpStatus.NOT_FOUND, "Café no encontrado"
                 ));
 
-        return carritoHasCafeRepository
+        CarritoHasCafe saved = carritoHasCafeRepository
                 .findByCarrito_IdCarritoAndCafe_IdCafe(
                         dto.getCarritoId(), dto.getCafeId()
                 )
@@ -70,10 +74,12 @@ public class CarritoHasCafeService {
                     nuevo.setCantidad(dto.getCantidad());
                     return carritoHasCafeRepository.save(nuevo);
                 });
+
+        return toDTO(saved);
     }
 
     @Transactional
-    public CarritoHasCafe actualizarCantidad(Long id, Long cantidad) {
+    public CarritoHasCafeResponseDTO actualizarCantidad(Long id, Long cantidad) {
         if (cantidad == null || cantidad <= 0) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
@@ -87,7 +93,7 @@ public class CarritoHasCafeService {
                 ));
 
         item.setCantidad(cantidad);
-        return carritoHasCafeRepository.save(item);
+        return toDTO(carritoHasCafeRepository.save(item));
     }
 
     @Transactional
@@ -100,4 +106,16 @@ public class CarritoHasCafeService {
 
         carritoHasCafeRepository.deleteById(id);
     }
-}
+
+    private CarritoHasCafeResponseDTO toDTO(CarritoHasCafe item) {
+        return CarritoHasCafeResponseDTO.builder()
+                .id(item.getId())
+                .carritoId(item.getCarrito().getIdCarrito())
+                .cafeId(item.getCafe().getIdCafe())
+                .nombreCafe(item.getCafe().getNombreCafe())
+                .imagenCafe(item.getCafe().getImagenCafe())
+                .precioCafe(item.getCafe().getPrecioCafe().toPlainString())
+                .cantidad(item.getCantidad())
+                .build();
+    }
+}
