@@ -22,4 +22,6 @@ public class UsuarioRequest {
     @NotBlank(message = "El telefóno no puede ir vacio")
     @Size(max = 10, message = "El teléfono no puede tener más de 10 dígitos")
     private String numero;
+    @NotBlank(message = "La confirmación de contraseña no puede ir vacia")
+    private String confirmarContrasenia;
 }

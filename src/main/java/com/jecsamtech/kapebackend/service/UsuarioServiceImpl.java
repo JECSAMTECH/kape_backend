@@ -3,6 +3,7 @@ package com.jecsamtech.kapebackend.service;
 import com.jecsamtech.kapebackend.dto.UsuarioAdminRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioResponse;
+import com.jecsamtech.kapebackend.exception.PasswordMismatchException;
 import com.jecsamtech.kapebackend.exception.ResourceAlreadyExistsException;
 import com.jecsamtech.kapebackend.exception.ResourceNotFoundException;
 import com.jecsamtech.kapebackend.model.Rol;
@@ -36,8 +37,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 
         //String encodedPassword = passwordEncoder.encode(usuarioRequest.getContrasenia());
 
+        if (!usuarioRequest.getContrasenia()
+                .equals(usuarioRequest.getConfirmarContrasenia())) {
+
+            throw new IllegalArgumentException("Las contraseñas no coinciden");
+        }
+
         Rol clientRole = rolRepository.findByNombreRol("CLIENTE")
-                .orElseThrow(()-> new ResourceNotFoundException("No se encontro el rol \"Cliente\""));
+                .orElseThrow(()-> new PasswordMismatchException("No se encontro el rol \"Cliente\""));
 
         LocalDateTime registrationDate = LocalDateTime.now();
 
