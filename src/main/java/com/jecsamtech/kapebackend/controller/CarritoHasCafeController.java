@@ -2,7 +2,7 @@ package com.jecsamtech.kapebackend.controller;
 
 import com.jecsamtech.kapebackend.dto.ActualizarCantidadDTO;
 import com.jecsamtech.kapebackend.dto.CarritoHasCafeDTO;
-import com.jecsamtech.kapebackend.model.CarritoHasCafe;
+import com.jecsamtech.kapebackend.dto.CarritoHasCafeResponseDTO;
 import com.jecsamtech.kapebackend.service.CarritoHasCafeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/carrito-cafe")
+@CrossOrigin(origins = "*")
 public class CarritoHasCafeController {
 
     private final CarritoHasCafeService carritoHasCafeService;
@@ -21,20 +22,20 @@ public class CarritoHasCafeController {
     }
 
     @GetMapping("/carrito/{carritoId}")
-    public List<CarritoHasCafe> getByCarrito(@PathVariable Long carritoId) {
+    public List<CarritoHasCafeResponseDTO> getByCarrito(@PathVariable Long carritoId) {
         return carritoHasCafeService.findByCarrito(carritoId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CarritoHasCafe agregar(
+    public CarritoHasCafeResponseDTO agregar(
             @Valid @RequestBody CarritoHasCafeDTO dto
     ) {
         return carritoHasCafeService.agregar(dto);
     }
 
     @PutMapping("/{id}")
-    public CarritoHasCafe actualizarCantidad(
+    public CarritoHasCafeResponseDTO actualizarCantidad(
             @PathVariable Long id,
             @Valid @RequestBody ActualizarCantidadDTO dto
     ) {
