@@ -88,7 +88,6 @@ public class PedidoService {
                 .usuario(usuario)
                 .direccion(direccion)
                 .metodoPago(metodoPago)
-                .numTelefono(dto.getNumTelefono())
                 .tipoEnvio(dto.getTipoEnvio())
                 // pone la fecha actual
                 .fechaPedido(new Date()) //verificar tipo de dato Date
@@ -129,7 +128,6 @@ public class PedidoService {
                 .idPedido(pedido.getIdPedido())
                 .total(pedido.getTotal())
                 .estatus(pedido.getEstatus())
-                .numTelefono(pedido.getNumTelefono())
                 .tipoEnvio(pedido.getTipoEnvio())
                 .fechaPedido(pedido.getFechaPedido())
                 .fechaEnvio(pedido.getFechaEnvio())
