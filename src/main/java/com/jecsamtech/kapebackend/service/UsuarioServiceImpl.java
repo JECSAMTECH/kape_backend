@@ -1,5 +1,6 @@
 package com.jecsamtech.kapebackend.service;
 
+import com.jecsamtech.kapebackend.dto.LoginRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioAdminRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioResponse;
@@ -31,6 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public UsuarioResponse crearCliente(UsuarioRequest usuarioRequest) {
 
+        System.out.println("REQUEST RECIBIDO");
         if (usuarioRepository.existsByCorreo(usuarioRequest.getCorreo())){
             throw new ResourceAlreadyExistsException("El email ya existe, pruebe uno distinto");
         }
@@ -110,6 +112,19 @@ public class UsuarioServiceImpl implements UsuarioService{
     public void eliminarUsuarioPorId(Long id) {
         encontrarEntidadUsuarioPorId(id);
         usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public UsuarioResponse iniciarSesion(LoginRequest loginRequest) {
+        Usuario usuario = usuarioRepository.findByCorreo(loginRequest.getCorreo())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Correo o contraseña incorrectos"));
+
+        if (!usuario.getContrasenia().equals(loginRequest.getContrasenia())) {
+            throw new IllegalArgumentException("Correo o contraseña incorrectos");
+        }
+
+        return convertToUsuarioResponse(usuario);
     }
 
     private UsuarioResponse convertToUsuarioResponse(Usuario usuario){

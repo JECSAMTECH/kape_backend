@@ -1,5 +1,6 @@
 package com.jecsamtech.kapebackend.controller;
 
+import com.jecsamtech.kapebackend.dto.LoginRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioAdminRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioResponse;
@@ -72,5 +73,14 @@ public class UsuarioController {
         usuarioService.eliminarUsuarioPorId(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UsuarioResponse> iniciarSesion(
+            @RequestBody @Valid LoginRequest loginRequest) {
+
+        UsuarioResponse usuarioResponse = usuarioService.iniciarSesion(loginRequest);
+
+        return ResponseEntity.ok(usuarioResponse);
     }
 }
