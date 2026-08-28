@@ -23,7 +23,7 @@ public class DetallePedidoService {
     private final DetallePedidoRepository detallePedidoRepository;
     private final CafeRepository cafeRepository;
     private final PedidoRepository pedidoRepository;
-    private final ReseniaRepository reseniaRepository;
+    //private final ReseniaRepository reseniaRepository;
 
     public DetallePedidoService(DetallePedidoRepository detallePedidoRepository,
                                 CafeRepository cafeRepository,
@@ -32,7 +32,7 @@ public class DetallePedidoService {
         this.detallePedidoRepository = detallePedidoRepository;
         this.cafeRepository = cafeRepository;
         this.pedidoRepository = pedidoRepository;
-        this.reseniaRepository = reseniaRepository;
+        //this.reseniaRepository = reseniaRepository;
     }
 
     @Transactional(readOnly = true)
@@ -63,8 +63,8 @@ public class DetallePedidoService {
         Pedido pedido = pedidoRepository.findById(dto.getPedidoId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido no encontrado"));
 
-        Resenia resenia = reseniaRepository.findById(dto.getReseniaId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reseña no encontrada"));
+//        Resenia resenia = reseniaRepository.findById(dto.getReseniaId())
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reseña no encontrada"));
 
         DetallePedido entity = new DetallePedido();
         entity.setCafe(cafe);

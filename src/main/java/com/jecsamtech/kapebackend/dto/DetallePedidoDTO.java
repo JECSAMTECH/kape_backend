@@ -24,8 +24,8 @@ public class DetallePedidoDTO {
     @NotNull(message = "El numero de pedido es obligatorio")
     private Long pedidoId;
 
-    @NotNull(message = "La reseña es obligatoria")
-    private Long reseniaId;
+    //@NotNull(message = "La reseña es obligatoria")
+    //private Long reseniaId;
 
     @NotNull(message = "El tipo de molienda es obligatorio")
     private Molienda molienda;
