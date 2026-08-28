@@ -1,5 +1,6 @@
 package com.jecsamtech.kapebackend.service;
 
+import com.jecsamtech.kapebackend.dto.LoginRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioAdminRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioRequest;
 import com.jecsamtech.kapebackend.dto.UsuarioResponse;
@@ -15,4 +16,5 @@ public interface UsuarioService {
     List<UsuarioResponse> encontrarTodosLosUsuarios();
     UsuarioResponse actualizarUsuarioPorId(Long id, UsuarioRequest usuarioRequest);
     void eliminarUsuarioPorId(Long id);
+    UsuarioResponse iniciarSesion(LoginRequest loginRequest);
 }
