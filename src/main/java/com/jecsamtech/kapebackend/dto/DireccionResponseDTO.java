@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DireccionResponseDTO {
     private Long idDireccion;
+    private Long usuarioId;
     private String calle;
     private String colonia;
     private String numero;

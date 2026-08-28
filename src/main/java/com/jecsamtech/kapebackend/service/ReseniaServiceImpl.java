@@ -33,7 +33,7 @@ public class ReseniaServiceImpl implements ReseniaService {
     @Transactional(readOnly = true)
     public ReseniaDto findById(Long id) {
         Resenia resenia = reseniaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reseña no encontrada con ID: " + id));
+                .orElseThrow(() -> new com.jecsamtech.kapebackend.exception.ResourceNotFoundException("Reseña no encontrada con ID: " + id));
         return mapToDto(resenia);
     }
 
@@ -68,14 +68,14 @@ public class ReseniaServiceImpl implements ReseniaService {
     @Transactional
     public ReseniaDto update(Long id, ReseniaDto reseniaDto) {
         Resenia existingResenia = reseniaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reseña no encontrada con ID: " + id));
+                .orElseThrow(() -> new com.jecsamtech.kapebackend.exception.ResourceNotFoundException("Reseña no encontrada con ID: " + id));
 
         existingResenia.setCalificacion(reseniaDto.getCalificacion());
         existingResenia.setComentario(reseniaDto.getComentario());
 
         if (reseniaDto.getIdDetallePedido() != null) {
             DetallePedido detallePedido = detallePedidoRepository.findById(reseniaDto.getIdDetallePedido())
-                    .orElseThrow(() -> new RuntimeException("Detalle de pedido no encontrado"));
+                    .orElseThrow(() -> new com.jecsamtech.kapebackend.exception.ResourceNotFoundException("Detalle de pedido no encontrado"));
             existingResenia.setDetallePedido(detallePedido);
         }
 
@@ -87,7 +87,7 @@ public class ReseniaServiceImpl implements ReseniaService {
     @Transactional
     public void delete(Long id) {
         if (!reseniaRepository.existsById(id)) {
-            throw new RuntimeException("Reseña no encontrada con ID: " + id);
+            throw new com.jecsamtech.kapebackend.exception.ResourceNotFoundException("Reseña no encontrada con ID: " + id);
         }
         reseniaRepository.deleteById(id);
     }
@@ -106,7 +106,7 @@ public class ReseniaServiceImpl implements ReseniaService {
         DetallePedido detallePedido = null;
         if (dto.getIdDetallePedido() != null) {
             detallePedido = detallePedidoRepository.findById(dto.getIdDetallePedido())
-                    .orElseThrow(() -> new RuntimeException("Detalle de pedido no encontrado"));
+                    .orElseThrow(() -> new com.jecsamtech.kapebackend.exception.ResourceNotFoundException("Detalle de pedido no encontrado"));
         }
 
         return Resenia.builder()

@@ -30,15 +30,18 @@ public class CarritoService {
 
     public CarritoDTO crearCarrito(Long usuarioId) {
         Usuario usuario = usuarioRepository.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + usuarioId));
+                .orElseThrow(() -> new com.jecsamtech.kapebackend.exception.ResourceNotFoundException("Usuario no encontrado con ID: " + usuarioId));
 
-        Carrito carrito = new Carrito();
-        carrito.setUsuario(usuario);
-        carrito.setFechaCreacion(LocalDateTime.now());
-        carrito.setFechaActualizacion(LocalDateTime.now());
-
-        Carrito guardado = carritoRepository.save(carrito);
-        return convertirADTO(guardado);
+        return carritoRepository.findByUsuario_IdUsuario(usuarioId)
+                .map(this::convertirADTO)
+                .orElseGet(() -> {
+                    Carrito carrito = new Carrito();
+                    carrito.setUsuario(usuario);
+                    carrito.setFechaCreacion(LocalDateTime.now());
+                    carrito.setFechaActualizacion(LocalDateTime.now());
+                    Carrito guardado = carritoRepository.save(carrito);
+                    return convertirADTO(guardado);
+                });
     }
 
     private CarritoDTO convertirADTO(Carrito carrito) {

@@ -27,6 +27,11 @@ public class DireccionController {
         return direccionService.findById(id);
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<DireccionResponseDTO> getByUsuario(@PathVariable Long usuarioId) {
+        return direccionService.findByUsuario(usuarioId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DireccionResponseDTO create(

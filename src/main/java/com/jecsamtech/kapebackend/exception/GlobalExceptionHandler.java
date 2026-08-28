@@ -31,6 +31,27 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(httpError, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<HttpError> illegalArgumentException(IllegalArgumentException err) {
+        HttpError httpError = new HttpError(HttpStatus.BAD_REQUEST.value(), err.getMessage(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(httpError, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PasswordMismatchException.class)
+    public ResponseEntity<HttpError> passwordMismatchException(PasswordMismatchException err) {
+        HttpError httpError = new HttpError(HttpStatus.BAD_REQUEST.value(), err.getMessage(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(httpError, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(org.springframework.web.server.ResponseStatusException.class)
+    public ResponseEntity<HttpError> responseStatusException(org.springframework.web.server.ResponseStatusException err) {
+        HttpError httpError = new HttpError(err.getStatusCode().value(), err.getReason(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(httpError, err.getStatusCode());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<HttpError> notValidException(MethodArgumentNotValidException err){
 

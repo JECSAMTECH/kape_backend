@@ -75,6 +75,16 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioResponse> actualizarUsuarioPorId(
+            @PathVariable Long id,
+            @RequestBody UsuarioRequest usuarioRequest){
+
+        UsuarioResponse usuarioResponse = usuarioService.actualizarUsuarioPorId(id, usuarioRequest);
+
+        return ResponseEntity.ok(usuarioResponse);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<UsuarioResponse> iniciarSesion(
             @RequestBody @Valid LoginRequest loginRequest) {

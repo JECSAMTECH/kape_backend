@@ -38,7 +38,7 @@ public class CafeController {
     }
 
     @PutMapping("/{id}")
-    public CafeResponseDTO update(@PathVariable Long id, @RequestBody CafeCreateDTO dto){
+    public CafeResponseDTO update(@PathVariable Long id, @Valid @RequestBody CafeCreateDTO dto){
         return cafeService.update(id, dto);
     }
 

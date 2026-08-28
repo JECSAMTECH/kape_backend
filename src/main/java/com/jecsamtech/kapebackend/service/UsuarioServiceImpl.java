@@ -46,7 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         }
 
         Rol clientRole = rolRepository.findByNombreRol("CLIENTE")
-                .orElseThrow(()-> new PasswordMismatchException("No se encontro el rol \"Cliente\""));
+                .orElseThrow(()-> new ResourceNotFoundException("No se encontro el rol \"Cliente\""));
 
         LocalDateTime registrationDate = LocalDateTime.now();
 
@@ -82,6 +82,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setRol(clientRole);
         usuario.setContrasenia(usuarioAdminRequest.getContrasenia());
         usuario.setFechaRegistro(registrationDate);
+        usuario.setTelefono(usuarioAdminRequest.getNumero() != null ? usuarioAdminRequest.getNumero() : "");
 
 
         Usuario savedUsuario = usuarioRepository.save(usuario);
@@ -105,7 +106,34 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public UsuarioResponse actualizarUsuarioPorId(Long id, UsuarioRequest usuarioRequest) {
-        return null;
+        Usuario usuario = encontrarEntidadUsuarioPorId(id);
+
+        if (usuarioRequest.getCorreo() != null && !usuarioRequest.getCorreo().isBlank()
+                && !usuarioRequest.getCorreo().equalsIgnoreCase(usuario.getCorreo())) {
+            if (usuarioRepository.existsByCorreo(usuarioRequest.getCorreo())) {
+                throw new ResourceAlreadyExistsException("El email ya existe, pruebe uno distinto");
+            }
+            usuario.setCorreo(usuarioRequest.getCorreo());
+        }
+
+        if (usuarioRequest.getNombre() != null && !usuarioRequest.getNombre().isBlank()) {
+            usuario.setNombre(usuarioRequest.getNombre());
+        }
+
+        if (usuarioRequest.getNumero() != null && !usuarioRequest.getNumero().isBlank()) {
+            usuario.setTelefono(usuarioRequest.getNumero());
+        }
+
+        if (usuarioRequest.getContrasenia() != null && !usuarioRequest.getContrasenia().isBlank()) {
+            if (usuarioRequest.getConfirmarContrasenia() != null &&
+                    !usuarioRequest.getContrasenia().equals(usuarioRequest.getConfirmarContrasenia())) {
+                throw new IllegalArgumentException("Las contraseñas no coinciden");
+            }
+            usuario.setContrasenia(usuarioRequest.getContrasenia());
+        }
+
+        Usuario usuarioActualizado = usuarioRepository.save(usuario);
+        return convertToUsuarioResponse(usuarioActualizado);
     }
 
     @Override

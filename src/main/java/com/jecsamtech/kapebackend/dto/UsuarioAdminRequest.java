@@ -20,4 +20,5 @@ public class UsuarioAdminRequest {
     private String correo;
     @NotBlank(message = "La contraseña no puede ir vacia")
     private String contrasenia;
+    private String numero;
 }
