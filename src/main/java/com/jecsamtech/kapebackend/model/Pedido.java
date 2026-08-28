@@ -32,10 +32,6 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private Estatus estatus;
 
-    // num_telefono
-    @Column(name = "num_telefono", nullable = false)
-    private String numTelefono;
-
     // typo_envio (enum)
     @Column(name = "tipo_envio", nullable = false)
     @Enumerated(EnumType.STRING)

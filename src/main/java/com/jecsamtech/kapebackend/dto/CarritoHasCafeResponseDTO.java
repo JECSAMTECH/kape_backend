@@ -1,20 +1,21 @@
 package com.jecsamtech.kapebackend.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CarritoHasCafeResponseDTO {
 
     private Long id;
     private Long carritoId;
     private Long cafeId;
     private String nombreCafe;
-    private BigDecimal precioCafe;
+    private String imagenCafe;
+    private String precioCafe;
     private Long cantidad;
 }

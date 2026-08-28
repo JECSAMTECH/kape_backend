@@ -26,8 +26,10 @@ public class Usuario {
     private String contrasenia;
     @Column(name = "fecha_registro", nullable = false)
     private LocalDateTime fechaRegistro;
+    @Column(name = "telefono", nullable = false)
+    private String telefono;
     @JoinColumn(name = "id_rol", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Rol rol;
 
 }

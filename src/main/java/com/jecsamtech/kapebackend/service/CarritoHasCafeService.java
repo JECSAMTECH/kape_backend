@@ -36,7 +36,7 @@ public class CarritoHasCafeService {
     public List<CarritoHasCafeResponseDTO> findByCarrito(Long carritoId) {
         return carritoHasCafeRepository.findByCarrito_IdCarrito(carritoId)
                 .stream()
-                .map(this::toResponseDTO)
+                .map(this::toDTO)
                 .toList();
     }
 
@@ -59,7 +59,7 @@ public class CarritoHasCafeService {
                         HttpStatus.NOT_FOUND, "Café no encontrado"
                 ));
 
-        CarritoHasCafe guardado = carritoHasCafeRepository
+        CarritoHasCafe saved = carritoHasCafeRepository
                 .findByCarrito_IdCarritoAndCafe_IdCafe(
                         dto.getCarritoId(), dto.getCafeId()
                 )
@@ -75,7 +75,7 @@ public class CarritoHasCafeService {
                     return carritoHasCafeRepository.save(nuevo);
                 });
 
-        return toResponseDTO(guardado);
+        return toDTO(saved);
     }
 
     @Transactional
@@ -93,7 +93,7 @@ public class CarritoHasCafeService {
                 ));
 
         item.setCantidad(cantidad);
-        return toResponseDTO(carritoHasCafeRepository.save(item));
+        return toDTO(carritoHasCafeRepository.save(item));
     }
 
     @Transactional
@@ -107,15 +107,15 @@ public class CarritoHasCafeService {
         carritoHasCafeRepository.deleteById(id);
     }
 
-    private CarritoHasCafeResponseDTO toResponseDTO(CarritoHasCafe item) {
-        Cafe cafe = item.getCafe();
-        return new CarritoHasCafeResponseDTO(
-                item.getId(),
-                item.getCarrito() != null ? item.getCarrito().getIdCarrito() : null,
-                cafe != null ? cafe.getIdCafe() : null,
-                cafe != null ? cafe.getNombreCafe() : null,
-                cafe != null ? cafe.getPrecioCafe() : null,
-                item.getCantidad()
-        );
+    private CarritoHasCafeResponseDTO toDTO(CarritoHasCafe item) {
+        return CarritoHasCafeResponseDTO.builder()
+                .id(item.getId())
+                .carritoId(item.getCarrito().getIdCarrito())
+                .cafeId(item.getCafe().getIdCafe())
+                .nombreCafe(item.getCafe().getNombreCafe())
+                .imagenCafe(item.getCafe().getImagenCafe())
+                .precioCafe(item.getCafe().getPrecioCafe().toPlainString())
+                .cantidad(item.getCantidad())
+                .build();
     }
-}
+}

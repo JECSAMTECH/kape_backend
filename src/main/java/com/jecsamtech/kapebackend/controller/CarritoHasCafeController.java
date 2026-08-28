@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/carrito-cafe")
-@CrossOrigin(origins = "*")
 public class CarritoHasCafeController {
 
     private final CarritoHasCafeService carritoHasCafeService;
@@ -47,4 +46,4 @@ public class CarritoHasCafeController {
     public void eliminar(@PathVariable Long id) {
         carritoHasCafeService.eliminar(id);
     }
-}
+}
