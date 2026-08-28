@@ -50,6 +50,14 @@ public class DireccionService {
     }
 
     @Transactional(readOnly = true)
+    public List<DireccionResponseDTO> findByUsuario(Long idUsuario) {
+        return direccionRepository.findByUsuario_IdUsuario(idUsuario)
+                .stream()
+                .map(this::toResponseDTO)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
     public DireccionResponseDTO findById(Long id) {
         return toResponseDTO(findEntityById(id));
     }
@@ -78,6 +86,7 @@ public class DireccionService {
     private DireccionResponseDTO toResponseDTO(Direccion direccion) {
         return DireccionResponseDTO.builder()
                 .idDireccion(direccion.getIdDireccion())
+                .usuarioId(direccion.getUsuario() != null ? direccion.getUsuario().getIdUsuario() : null)
                 .calle(direccion.getCalle())
                 .colonia(direccion.getColonia())
                 .numero(direccion.getNumero())
