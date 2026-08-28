@@ -1,6 +1,3 @@
-# Copia este archivo como "application-local.properties" y pon tus datos locales.
-# "application-local.properties" esta en .gitignore, asi cada quien tiene los suyos
-# y tus cambios nunca se envian a tus companeros.
 spring.datasource.url=jdbc:mysql://localhost:3306/kape
 spring.datasource.username=root
 spring.datasource.password=TU_PASSWORD_LOCAL
